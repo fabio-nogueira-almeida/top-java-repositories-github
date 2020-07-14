@@ -10,6 +10,9 @@ import Foundation
 // MARK: - Repository
 
 struct Repository {
+	
+	// MARK: - Property
+	
     let id: Int
     let name: String
     let description: String

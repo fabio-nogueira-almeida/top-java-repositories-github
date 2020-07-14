@@ -37,7 +37,9 @@ extension RepositoryApiResponse: Decodable {
 // MARK: - GithubProvider
 
 struct GithubProvider {
-	func getJavaRepositories(page: Int, completion: @escaping (_ movie: [Repository]?,_ error: String?)->()){
+	func getJavaRepositories(page: Int, completion: @escaping (_ movie: [Repository]?,
+															   _ isLastPage: Bool?,
+															   _ error: String?)->()){
 			let router = Router<GithubEndPoint>()
 			router.request(.repositories(language: "Java", page: page)) { data, response, error in
 	
@@ -47,7 +49,7 @@ struct GithubProvider {
 					switch result {
 					case .success:
 						guard let responseData = data else {
-							completion(nil, NetworkResponse.noData.rawValue)
+							completion(nil, nil, NetworkResponse.noData.rawValue)
 							return
 						}
 	
@@ -56,14 +58,14 @@ struct GithubProvider {
 							let apiResponse = try JSONDecoder().decode(RepositoryApiResponse.self,
 																	   from: responseData)
 							
-							completion(apiResponse.items, nil)
+							completion(apiResponse.items, !apiResponse.incompleteResults, nil)
 	
 						} catch {
-							completion(nil, NetworkResponse.unableToDecode.rawValue)
+							completion(nil, nil, NetworkResponse.unableToDecode.rawValue)
 						}
 	
 					case .failure(let networkFailureError):
-						completion(nil, networkFailureError)
+						completion(nil, nil, networkFailureError)
 					}
 				}
 			}
