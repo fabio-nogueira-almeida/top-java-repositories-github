@@ -37,8 +37,6 @@ class PullRequestBusiness {
 			
 			provider.getPullRequest(repository: repository.name,
 									owner: repository.owner.login) { results, error in
-//				self.isLastPage = isLastPage ?? false
-//				self.page += 1
 				self.delegate?.dataFetched(items: results)
 			}
 		}

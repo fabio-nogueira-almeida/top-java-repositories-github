@@ -69,7 +69,6 @@ class PullRequestCollectionViewController: UIViewController {
 		collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
 		collectionView?.contentInsetAdjustmentBehavior = .always
 		collectionView?.backgroundColor = .white
-//		collectionView?.delegate = self
 		collectionView?.dataSource = self
 
 		self.view.addSubview(collectionView!)

@@ -97,7 +97,7 @@ struct GithubProvider {
 					do {
 						let apiResponse = try JSONDecoder().decode([PullRequest].self, from: responseData)
 						
-						os_log("getPullRequest - items: %@", log: OSLog.api, type: .debug, apiResponse.items)
+						os_log("getPullRequest: %@", log: OSLog.api, type: .debug, apiResponse)
 						
 						completion(apiResponse, nil)
 

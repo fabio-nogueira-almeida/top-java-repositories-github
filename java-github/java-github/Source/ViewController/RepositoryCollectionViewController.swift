@@ -20,7 +20,7 @@ class RepositoryCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		title = "Github"
+		title = Text.title
 		setupLayout()
 		registerCell()
 		viewModel.delegate = self
