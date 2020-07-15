@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 // MARK: - RepositoryApiResponse
 
@@ -42,7 +43,7 @@ struct GithubProvider {
 															   _ error: String?)->()){
 			let router = Router<GithubEndPoint>()
 			router.request(.repositories(language: "Java", page: page)) { data, response, error in
-	
+
 				if let response = response as? HTTPURLResponse {
 					let result = NetworkManager.handleNetworkResponse(response)
 	
@@ -57,6 +58,10 @@ struct GithubProvider {
 	
 							let apiResponse = try JSONDecoder().decode(RepositoryApiResponse.self,
 																	   from: responseData)
+							
+							os_log("getJavaRepositories - inpleteResults: %@", log: OSLog.api, type: .debug, apiResponse.incompleteResults)
+							os_log("getJavaRepositories - totalCount: %@", log: OSLog.api, type: .debug, apiResponse.totalCount)
+							os_log("getJavaRepositories - items: %@", log: OSLog.api, type: .debug, apiResponse.items)
 							
 							completion(apiResponse.items, !apiResponse.incompleteResults, nil)
 	
@@ -91,6 +96,9 @@ struct GithubProvider {
 
 					do {
 						let apiResponse = try JSONDecoder().decode([PullRequest].self, from: responseData)
+						
+						os_log("getPullRequest - items: %@", log: OSLog.api, type: .debug, apiResponse.items)
+						
 						completion(apiResponse, nil)
 
 					} catch {
