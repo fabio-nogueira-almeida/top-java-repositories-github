@@ -37,6 +37,8 @@
 		D9D6683B24BC9E3600D0DD2A /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6683A24BC9E3600D0DD2A /* ParameterEncoding.swift */; };
 		D9D6683D24BCA1D100D0DD2A /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6683C24BCA1D100D0DD2A /* URLParameterEncoder.swift */; };
 		D9FBFC1B24BE19900053AF3C /* RepositoryBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBFC1A24BE19900053AF3C /* RepositoryBusiness.swift */; };
+		D9FBFC1D24BE46610053AF3C /* PullRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBFC1C24BE46610053AF3C /* PullRequestViewModel.swift */; };
+		D9FBFC1F24BE468D0053AF3C /* PullRequestBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBFC1E24BE468D0053AF3C /* PullRequestBusiness.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		D9D6683A24BC9E3600D0DD2A /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		D9D6683C24BCA1D100D0DD2A /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
 		D9FBFC1A24BE19900053AF3C /* RepositoryBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryBusiness.swift; sourceTree = "<group>"; };
+		D9FBFC1C24BE46610053AF3C /* PullRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestViewModel.swift; sourceTree = "<group>"; };
+		D9FBFC1E24BE468D0053AF3C /* PullRequestBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestBusiness.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				D98CC9F624BD39F1003EC1C7 /* RepositoryViewModel.swift */,
+				D9FBFC1C24BE46610053AF3C /* PullRequestViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				D9FBFC1A24BE19900053AF3C /* RepositoryBusiness.swift */,
+				D9FBFC1E24BE468D0053AF3C /* PullRequestBusiness.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -469,11 +475,13 @@
 				D98CC9D624BCC846003EC1C7 /* NetworkManager.swift in Sources */,
 				D98CC9DE24BCEFBE003EC1C7 /* User.swift in Sources */,
 				D98CC9D824BCC90D003EC1C7 /* Repository.swift in Sources */,
+				D9FBFC1D24BE46610053AF3C /* PullRequestViewModel.swift in Sources */,
 				D98CC9EC24BD2797003EC1C7 /* PullRequestCollectionViewCell.swift in Sources */,
 				D9D6683524BC9C1900D0DD2A /* EndPointProtocol.swift in Sources */,
 				D98CC9E024BCF13C003EC1C7 /* PullRequests.swift in Sources */,
 				D9D667FB24BC991500D0DD2A /* ViewController.swift in Sources */,
 				D98CC9CE24BCA2AD003EC1C7 /* JSONParameterEncoder.swift in Sources */,
+				D9FBFC1F24BE468D0053AF3C /* PullRequestBusiness.swift in Sources */,
 				D98CC9D424BCC7BF003EC1C7 /* GithubEndPoint.swift in Sources */,
 				D9D667F724BC991500D0DD2A /* AppDelegate.swift in Sources */,
 				D98CC9F724BD39F1003EC1C7 /* RepositoryViewModel.swift in Sources */,

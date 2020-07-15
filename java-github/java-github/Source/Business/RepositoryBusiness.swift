@@ -23,8 +23,7 @@ class RepositoryBusiness {
 	
 	func fetchData() {
 		let provider = GithubProvider()
-		
-		if !isLastPage {
+		if isLastPage == false {
 			provider.getJavaRepositories(page: page) { repositories, isLastPage, error in
 				self.isLastPage = isLastPage ?? false
 				self.page += 1

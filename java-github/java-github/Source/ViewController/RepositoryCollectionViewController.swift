@@ -12,41 +12,21 @@ class RepositoryCollectionViewController: UIViewController {
 	
 	// MARK: - Property
 	
-	var collectionView: UICollectionView?
-	var viewModel = RepositoryViewModel()
-	let business = RepositoryBusiness()
+	private var collectionView: UICollectionView?
+	private var viewModel = RepositoryViewModel()
+	private let business = RepositoryBusiness()
 	
 	// MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-		let layout = UICollectionViewFlowLayout()
-		layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-		layout.estimatedItemSize = .zero
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-		layout.itemSize = CGSize(width: self.view.frame.width, height: 130)
-        
-
-		collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-		collectionView?.contentInsetAdjustmentBehavior = .always
-		collectionView?.delegate = self
-		collectionView?.dataSource = self
-		collectionView?.backgroundColor = UIColor.white
-
-		self.view.addSubview(collectionView!)
-		
+		title = "Github"
+		setupLayout()
 		registerCell()
+		viewModel.delegate = self
 		business.delegate = self
 		business.fetchData()
     }
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		collectionView?.reloadData()
-	}
 	
 	// MARK: - Private
 	
@@ -55,7 +35,31 @@ class RepositoryCollectionViewController: UIViewController {
 			RepositoryCollectionViewCell.register(for: collectionView)
 		}
 	}
+	
+	private func setupLayout() {
+		let layout = UICollectionViewFlowLayout()
+		layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+		layout.estimatedItemSize = .zero
+		layout.scrollDirection = .vertical
+		layout.minimumInteritemSpacing = 0
+		layout.minimumLineSpacing = 0
+		layout.itemSize = CGSize(width: self.view.frame.width, height: 130)
 
+		collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+		collectionView?.contentInsetAdjustmentBehavior = .always
+		collectionView?.backgroundColor = .white
+		collectionView?.delegate = self
+		collectionView?.dataSource = self
+
+		self.view.addSubview(collectionView!)
+	}
+	
+	private func addMore(repositories: [Repository]) {
+		viewModel.add(model: repositories)
+		DispatchQueue.main.async {
+			self.collectionView?.reloadData()
+		}
+	}
 }
 
 // MARK: UICollectionViewDataSource
@@ -67,7 +71,8 @@ extension RepositoryCollectionViewController: UICollectionViewDataSource {
     }
 
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+						numberOfItemsInSection section: Int) -> Int {
 		return viewModel.numberOfItemsInSection()
     }
 
@@ -86,7 +91,9 @@ extension RepositoryCollectionViewController: UICollectionViewDataSource {
 
 extension RepositoryCollectionViewController: UICollectionViewDelegate {
 	
-//	optional func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		viewModel.didSelectItemAt(indexPath)
+	}
 	
 	func collectionView(_ collectionView: UICollectionView,
 						willDisplay cell: UICollectionViewCell,
@@ -100,10 +107,15 @@ extension RepositoryCollectionViewController: UICollectionViewDelegate {
 extension RepositoryCollectionViewController: RepositoryBusinessDelegate {
 	func dataFetched(items: [Repository]?) {
 		if let items = items {
-			viewModel.add(model: items)
-			DispatchQueue.main.async {
-				self.collectionView?.reloadData()
-			}
+			addMore(repositories: items)
 		}
+	}
+}
+
+extension RepositoryCollectionViewController :RepositoryViewModelDelegate {
+	func presentPullRequests(for repository: Repository) {
+		let controller = PullRequestCollectionViewController()
+		controller.setup(model: repository)
+		navigationController?.pushViewController(controller, animated: true)
 	}
 }
