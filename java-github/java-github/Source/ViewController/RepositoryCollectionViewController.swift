@@ -7,8 +7,15 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class RepositoryCollectionViewController: UIViewController {
+	
+	// MARK: - Combine
+	
+	private var subscriptions = Set<AnyCancellable>()
+	
+	
 	
 	// MARK: - Enum
 	
@@ -18,7 +25,8 @@ class RepositoryCollectionViewController: UIViewController {
 	
 	// MARK: - Property
 	
-	private var collectionView: UICollectionView?
+	@Published private var collectionView: UICollectionView?
+	
 	private var viewModel = RepositoryViewModel()
 	private let business = RepositoryBusiness()
 	
@@ -26,8 +34,9 @@ class RepositoryCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		setUpBindings()
 		view.accessibilityIdentifier = identifier.main.rawValue
-		title = Text.title
+		title = ScreenText.title
 		setupLayout()
 		registerCell()
 		viewModel.delegate = self
@@ -36,6 +45,22 @@ class RepositoryCollectionViewController: UIViewController {
     }
 	
 	// MARK: - Private
+	
+	private func setUpBindings() {
+		func bindViewModelToView() {
+			let viewModelsHandler: ([Repository]) -> Void = { [weak self] repositories in
+				DispatchQueue.main.async {
+					self?.collectionView?.reloadData()
+				}
+			}
+
+			viewModel.$model
+				.sink(receiveValue: viewModelsHandler)
+				.store(in: &subscriptions)
+		}
+		
+		bindViewModelToView()
+	}
 	
 	private func registerCell() {
 		if let collectionView = collectionView {
@@ -64,9 +89,6 @@ class RepositoryCollectionViewController: UIViewController {
 	
 	private func addMore(repositories: [Repository]) {
 		viewModel.add(model: repositories)
-		DispatchQueue.main.async {
-			self.collectionView?.reloadData()
-		}
 	}
 }
 
@@ -120,7 +142,7 @@ extension RepositoryCollectionViewController: RepositoryBusinessDelegate {
 	}
 }
 
-extension RepositoryCollectionViewController :RepositoryViewModelDelegate {
+extension RepositoryCollectionViewController: RepositoryViewModelDelegate {
 	func presentPullRequests(for repository: Repository) {
 		let controller = PullRequestCollectionViewController()
 		controller.setup(model: repository)

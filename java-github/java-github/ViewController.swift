@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
+	
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+	
 		if TestCoordinator.shared.isUITestingContext {
 			TestCoordinator.shared.startFlow(from: self)
 		} else {

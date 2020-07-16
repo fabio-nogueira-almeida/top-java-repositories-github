@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Text {
+struct ScreenText {
 	static let title = "Github"
 }

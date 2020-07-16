@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+import Combine
+
 protocol RepositoryViewModelDelegate {
 	func presentPullRequests(for repository: Repository)
 }
@@ -28,11 +30,13 @@ protocol RepositoryViewModelAPIProtocol {
 
 class RepositoryViewModel {
 	
+
+	
 	// MARK: - Property
 	
 	var delegate: RepositoryViewModelDelegate?
 	
-	private var model = [Repository]()
+	@Published var model = [Repository]()
 
 }
 
