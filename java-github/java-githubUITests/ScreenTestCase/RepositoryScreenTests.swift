@@ -5,19 +5,24 @@
 //  Created by Fábio Nogueira de Almeida on 15/07/20.
 //
 
-@testable import java_github
-import XCTest
-import Foundation
 
-//class RepositoryScreenTests: BaseTestCase {
-//	
-//	override func contextData() -> [String: String] {
-//		return [ApplicationEnviroment.controller.rawValue: "RepositoryCollectionViewController"]
-//	}
-//}
-//
-//extension RepositoryScreenTests {
-//	func testShouldOpenScreen() {
-//		_ = RepositoryScreen(app)
-//	}
-//}
+import XCTest
+import UIKit
+@testable import java_github
+
+class RepositoryScreenTests: BaseTestCase {
+	
+	override func contextData() -> [String: String] {
+		return [ApplicationEnviroment.controller.rawValue: String(describing: RepositoryCollectionViewController.self)]
+	}
+}
+
+extension RepositoryScreenTests {
+	func testShouldOpenScreen() {
+		_ = RepositoryScreen(app)
+	}
+	
+	func testShouldVerifyTitle() {
+		XCTAssertTrue(app.staticTexts["Github"].exists)
+	}
+}

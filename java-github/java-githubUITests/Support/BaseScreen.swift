@@ -21,7 +21,7 @@ class BaseScreen {
 		self.mainElement = Element(rawValue: main.rawValue)
 
 		if !main.view.waitForExistence(timeout: timeout) {
-			XCTFail("Main screen not laod")
+			XCTFail("Main screen not load")
 		}
 	}
 }

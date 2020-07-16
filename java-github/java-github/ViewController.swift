@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		view.backgroundColor = .systemOrange
+		
 		if TestCoordinator.shared.isUITestingContext {
 			TestCoordinator.shared.startFlow(from: self)
 		} else {

@@ -5,8 +5,8 @@
 //  Created by Fábio Nogueira de Almeida on 15/07/20.
 //
 
-@testable import java_github
 import XCTest
+@testable import java_github
 
 class RepositoryScreen: BaseScreen {
 	override init?(_ application: XCUIApplication, main: Element? = nil, timeout: Double = 1) {

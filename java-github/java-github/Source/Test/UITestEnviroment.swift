@@ -36,7 +36,7 @@ struct TestCoordinator {
 	// MARK: - Private
 	
 	private func presentController(name: String, from bundle: Bundle) {
-		let controllerClass = NSClassFromString("java-github." + name)! as! UIViewController.Type
+		let controllerClass = NSClassFromString("java_github." + name)! as! UIViewController.Type
 		let controller = controllerClass.init()
 		_ = controller.view
 		let navigationController = UINavigationController(rootViewController: controller)
@@ -48,7 +48,9 @@ struct TestCoordinator {
 		let bundle = Bundle.main
 		
 		if let controleName = ProcessInfo.processInfo.environment[ApplicationEnviroment.controller.rawValue] {
-//			presentController(name: controleName, from: bundle)
+			DispatchQueue.main.async {
+				presentController(name: controleName, from: bundle)
+			}
 		}
 	}
 	
