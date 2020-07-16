@@ -58,9 +58,7 @@ struct GithubProvider {
 	
 							let apiResponse = try JSONDecoder().decode(RepositoryApiResponse.self,
 																	   from: responseData)
-							
-							os_log("getJavaRepositories - inpleteResults: %@", log: OSLog.api, type: .debug, apiResponse.incompleteResults)
-							os_log("getJavaRepositories - totalCount: %@", log: OSLog.api, type: .debug, apiResponse.totalCount)
+
 							os_log("getJavaRepositories - items: %@", log: OSLog.api, type: .debug, apiResponse.items)
 							
 							completion(apiResponse.items, !apiResponse.incompleteResults, nil)

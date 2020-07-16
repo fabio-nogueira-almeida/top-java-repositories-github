@@ -18,9 +18,6 @@ class PullRequestBusiness {
 	weak var delegate: PullRequestBusinessDelegate?
 	var repository: Repository
 	
-	private var page = 0
-	private var isLastPage = false
-	
 	// MARKL: - Initialize
 	
 	init(repository: Repository) {
@@ -31,15 +28,10 @@ class PullRequestBusiness {
 	
 	func fetchData() {
 		let provider = GithubProvider()
-		
-		if !isLastPage {
-			
-			
 			provider.getPullRequest(repository: repository.name,
 									owner: repository.owner.login) { results, error in
 				self.delegate?.dataFetched(items: results)
 			}
-		}
 	}
 }
 

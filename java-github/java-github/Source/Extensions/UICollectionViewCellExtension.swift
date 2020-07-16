@@ -19,3 +19,4 @@ extension UICollectionViewCell {
         String(describing: self)
 	}
 }
+

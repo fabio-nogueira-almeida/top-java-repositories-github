@@ -10,6 +10,12 @@ import UIKit
 
 class RepositoryCollectionViewController: UIViewController {
 	
+	// MARK: - Enum
+	
+	enum identifier: String {
+		case main = "repository_id"
+	}
+	
 	// MARK: - Property
 	
 	private var collectionView: UICollectionView?
@@ -20,6 +26,7 @@ class RepositoryCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		view.accessibilityIdentifier = identifier.main.rawValue
 		title = Text.title
 		setupLayout()
 		registerCell()
@@ -37,6 +44,7 @@ class RepositoryCollectionViewController: UIViewController {
 	}
 	
 	private func setupLayout() {
+		
 		let layout = UICollectionViewFlowLayout()
 		layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 		layout.estimatedItemSize = .zero

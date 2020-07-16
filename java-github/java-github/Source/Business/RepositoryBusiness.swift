@@ -16,6 +16,7 @@ class RepositoryBusiness {
 	// MARK: - Property
 	
 	weak var delegate: RepositoryBusinessDelegate?
+	
 	private var page = 0
 	private var isLastPage = false
 	

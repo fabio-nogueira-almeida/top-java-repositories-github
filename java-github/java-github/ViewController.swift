@@ -12,11 +12,15 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		DispatchQueue.main.async {
-			let controller = RepositoryCollectionViewController()
-			let navigation = UINavigationController(rootViewController: controller)
-			navigation.modalPresentationStyle = .fullScreen
-			self.present(navigation, animated: true, completion: nil)
+		if TestCoordinator.shared.isUITestingContext {
+			TestCoordinator.shared.startFlow(from: self)
+		} else {
+			DispatchQueue.main.async {
+				let controller = RepositoryCollectionViewController()
+				let navigation = UINavigationController(rootViewController: controller)
+				navigation.modalPresentationStyle = .fullScreen
+				self.present(navigation, animated: true, completion: nil)
+			}
 		}
 	}
 }

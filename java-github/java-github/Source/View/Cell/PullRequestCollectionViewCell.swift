@@ -11,10 +11,10 @@ class PullRequestCollectionViewCell: UICollectionViewCell {
 
 	// MARK: - IBOutlet
 	
-	@IBOutlet private var repositoryLabel: UILabel?
-	@IBOutlet private var bodyTitleLabel: UILabel?
-	@IBOutlet private var usernameLabel: UILabel?
-	@IBOutlet private var userImageView: UIImageView?
+	@IBOutlet var repositoryLabel: UILabel?
+	@IBOutlet var bodyTitleLabel: UILabel?
+	@IBOutlet var usernameLabel: UILabel?
+	@IBOutlet var userImageView: UIImageView?
 	
 	// MARK: - Public
 	
